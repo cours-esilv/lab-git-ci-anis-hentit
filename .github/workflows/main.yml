@@ -1,11 +1,25 @@
+name: Java CI
 
-      # Installe java 8 sur l'agent
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+
+      # Installs Java 8 on the runner
       - name: Set up JDK 8
         uses: actions/setup-java@v2
         with:
           java-version: '8'
           distribution: 'adopt'
 
-      # Compile notre application
+      # Compiles our application
       - name: Build with Maven
         run: mvn --batch-mode --update-snapshots package
